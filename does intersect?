@@ -1,0 +1,38 @@
+import clr
+clr.AddReference("RevitNodes")
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+import Revit
+clr.ImportExtensions(Revit.Elements)
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+import System
+from System.Collections.Generic import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+
+
+pointz = IN[0]
+surfaces = IN[1]
+boolz = []
+
+surfcount = len(surfaces)
+pointzcount = len(pointz)
+
+for c,i in enumerate(surfaces):
+	for p,j in enumerate(pointz):
+		boolz.append(Geometry.DoesIntersect(surfaces[c],pointz[p]))
+		
+
+
+#Assign your output to the OUT variable.
+OUT = boolz,pointzcount

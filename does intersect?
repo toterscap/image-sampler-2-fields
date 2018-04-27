@@ -25,14 +25,18 @@ pointz = IN[0]
 surfaces = IN[1]
 boolz = []
 
+
+
 surfcount = len(surfaces)
 pointzcount = len(pointz)
 
-for c,i in enumerate(surfaces):
-	for p,j in enumerate(pointz):
-		boolz.append(Geometry.DoesIntersect(surfaces[c],pointz[p]))
-		
+
+for surface in surfaces:
+	for point in pointz:
+		if not Geometry.DoesIntersect(surface,point):
+			boolz.append(point)
+
 
 
 #Assign your output to the OUT variable.
-OUT = boolz,pointzcount
+OUT = boolz, surfaces

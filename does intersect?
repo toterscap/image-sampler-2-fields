@@ -25,7 +25,7 @@ pointz = IN[0]
 surfaces = IN[1]
 boolz = []
 
-
+points_to_remove = []
 
 surfcount = len(surfaces)
 pointzcount = len(pointz)
@@ -33,7 +33,7 @@ pointzcount = len(pointz)
 
 for surface in surfaces:
 	for point in pointz:
-		if not Geometry.DoesIntersect(surface,point):
+		if Geometry.DoesIntersect(surface,point) and Geometry.DoesIntersect(surface,point) not in points_to_remove:
 			boolz.append(point)
 
 
